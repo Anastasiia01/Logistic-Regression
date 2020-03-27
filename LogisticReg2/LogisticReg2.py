@@ -32,7 +32,7 @@ def main():
     y=data[:,-1].reshape(100,1)#initially y is (100,) matrix
     X=utils.normalizeData(X)
     X=np.hstack((np.ones((X.shape[0],1)),X))
-    beta=np.zeros((3,1))
+    beta=np.zeros((X.shape[1],1))#is 3x1 matrix
     num=1000
     beta=trainLogRegression(X,y,beta,num)   
     print(beta)

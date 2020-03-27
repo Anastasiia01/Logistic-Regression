@@ -35,8 +35,17 @@ class Utils():
         Y=y.reshape(100,)
         x0=X[Y==0]
         x1=X[Y==1]
+        # do a scatter plot of the data
         plt.scatter(x0[:,1],x0[:,2],c='b',marker='o',label="y=0")
         plt.scatter(x1[:,1],x1[:,2],c='r',marker='X',label="y=1")
+
+        #plot the fitted line
+        x1=X[:,1]
+        #hyp=beta0+beta1*x1+beta2*x2=X*beta
+        x2=-(beta[0]+beta[1]*x1)/beta[2]
+        plt.plot(x1,x2,linewidth=0.8,c='g',label='reg.line')
+
+        plt.title('Logistic Regression to classify binary data')
         plt.xlabel('x1')
         plt.ylabel('x2')
         plt.legend()
