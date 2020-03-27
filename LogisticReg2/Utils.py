@@ -12,15 +12,20 @@ class Utils():
 
     def readDataRandom(self):
         return None
+
     def normalizeData(self,X):
-        return None
+        max=np.max(X,axis=0)
+        min=np.min(X,axis=0)
+        norm_X=1-((max-X)/(max-min))
+        return norm_X
+
 
     def plotData(self,X,y):
-        y=y.reshape(100,)
+        #y=y.reshape(100,)
         x0=X[y==0]
         x1=X[y==1]
         plt.scatter(x0[:,1],x0[:,2],c='b',marker='o',label="y=0")
-        plt.scatter(x1[:,1],x0[:,2],c='r',marker='X',label="y=1")
+        plt.scatter(x1[:,1],x1[:,2],c='r',marker='X',label="y=1")
         plt.xlabel('x1')
         plt.ylabel('x2')
         plt.legend()
