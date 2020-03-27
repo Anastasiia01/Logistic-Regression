@@ -21,9 +21,21 @@ def trainLogRegression(X,y,beta,numIter,alpha=0.01):
         beta=beta-alpha*gradBeta(X,y,beta)
         if(i%10==0):
             loss=lossFunction(X,y,beta)
-            print("i= ",i,"loss= ",loss)
+            #print("i= ",i,"loss= ",loss)
     return beta
 
+def classify(X,beta):#returns matrix corresponding to X num of raws with class 0 or 1
+    h=sigmoid(X@beta)
+    h[h>=0.5]=1
+    h[h<0.5]=0
+    return h
+
+def getModelAccuracy(X,y,beta):
+    h=classify(X,beta)
+    #numOfWrongs=np.sum(y.T@(y-h)+(1-y).T@h)
+    #accur=(1-numOfWrongs/X.shape[0])*100
+    accur=np.sum(y==h/len(X)*100)
+    return accur   
 
 def main():
     utils = Utils()
@@ -35,9 +47,11 @@ def main():
     X=utils.normalizeData(X)
     X=np.hstack((np.ones((X.shape[0],1)),X))
     beta=np.zeros((X.shape[1],1))#is 3x1 matrix
-    num=1000
-    beta=trainLogRegression(X,y,beta,num)   
-    print(beta)
+    numOfIter=1000
+    beta=trainLogRegression(X,y,beta,numOfIter)   
+    print("Beta:\n"+str(beta))
+    accuracy=getModelAccuracy(X,y,beta)
+    print("Accuracy = ",accuracy,'%')
     utils.plotResult(X,y,beta)      
 
 
