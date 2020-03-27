@@ -28,6 +28,8 @@ def trainLogRegression(X,y,beta,numIter,alpha=0.01):
 def main():
     utils = Utils()
     data=utils.readData("C:/Users/anast/Documents/Deep Learning/DataSet.csv")
+    #data=utils.readDataRandom()
+    utils.readDataRandom()
     X=data[:,0:2]
     y=data[:,-1].reshape(100,1)#initially y is (100,) matrix
     X=utils.normalizeData(X)
@@ -36,8 +38,7 @@ def main():
     num=1000
     beta=trainLogRegression(X,y,beta,num)   
     print(beta)
-    utils.plotResult(X,y,beta)    
-    
+    utils.plotResult(X,y,beta)      
 
 
 if __name__ == "__main__":
